@@ -21,42 +21,30 @@ import org.example.interfaces.InterfaceOfBaseOrganWithGrowAbility
 
 // Тулуби додавати в listOfBodiesParameters !!!
 open class Body(organParams: ParamsOfBaseOrganThatCanNotBeGrowedWithGrowAbility=ParamsOfBaseOrganThatCanNotBeGrowedWithGrowAbility.BODY) : BaseOrganThatCanNotBeGrowedWithGrowAbility(organParams) {
-
-    override val organName: String
-        get() = TODO("Not yet implemented")
-    override val basePower: Int
-        get() = TODO("Not yet implemented")
 }
 
 open class Leg(organParams: ParamsOfBaseOrganThatCanBeGrowedWithGrowAbility=ParamsOfBaseOrganThatCanBeGrowedWithGrowAbility.LEG) : BaseOrganThatCanBeGrowedWithGrowAbility(organParams) {
     private fun doStep() {
         println("Нога зробила крок (доробити напрямок і переміщення організма по координатах)")
     }
-
-
-
 }
 
 open class Hand(organParams: ParamsOfBaseOrganThatCanBeGrowedWithGrowAbility=ParamsOfBaseOrganThatCanBeGrowedWithGrowAbility.HAND) : BaseOrganThatCanBeGrowedWithGrowAbility(organParams) {
     fun take() {
         println("Я схопила тебе! Тобі не вирватись!")
     }
-
 }
 
 open class Head(organParams: ParamsOfBaseOrganThatCanBeGrowedWithGrowAbility=ParamsOfBaseOrganThatCanBeGrowedWithGrowAbility.HEAD) : BaseOrganThatCanBeGrowedWithGrowAbility(organParams) {
     private fun processInformation() {
         println("Обробляю інформацію (доробити від кого і в залежності від результату обрати команду органу)")
     }
-
-
 }
 
 open class Mouth(organParams: ParamsOfBaseOrganThatCanBeGrowedWithGrowAbility=ParamsOfBaseOrganThatCanBeGrowedWithGrowAbility.MOUTH) : BaseOrganThatCanBeGrowedWithGrowAbility(organParams) {
     private fun eat() {
         println("Зжераю *об'єкт*")
     }
-
 }
 // ===========================
 // ----- Звичайні органи -----

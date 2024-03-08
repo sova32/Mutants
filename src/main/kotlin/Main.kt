@@ -71,7 +71,6 @@ abstract class BaseOrgan(organParams: InterfaceOfBaseOrganParams) : InterfaceOfB
     override val basePower: Int = organParams.basePower
 }
 
-
 abstract class BaseOrganWithOutGrowAbility(organParams: InterfaceOfBaseOrganParamsWithOutGrowAbility) :BaseOrgan(organParams), InterfaceOfBaseOrganWithOutGrowAbility {
 }
 
@@ -83,11 +82,15 @@ abstract class BaseOrganWithGrowAbility(organParams: InterfaceOfBaseOrganParamsW
 // Око, Ніс, Вухо
 abstract class BaseOrganThatCanBeGrowedWithOutGrowAbility(organParams: InterfaceOfBaseOrganParamsWithOutGrowAbility) :
     InterfaceOfBaseOrganThatCanBeGrowed, BaseOrganWithOutGrowAbility(organParams){
+    override val owner: InterfaceOfBaseOrganWithGrowAbility
+        get() = TODO("Not yet implemented")
 }
 
 // Нога Рука, Рот, Голова
 abstract class BaseOrganThatCanBeGrowedWithGrowAbility(organParams: InterfaceOfBaseOrganParamsWithGrowAbility) :
     InterfaceOfBaseOrganThatCanBeGrowed, BaseOrganWithGrowAbility(organParams){
+    override val owner: InterfaceOfBaseOrganWithGrowAbility
+        get() = TODO("Not yet implemented")
 }
 
 // Тулуб
@@ -98,26 +101,3 @@ abstract class BaseOrganThatCanNotBeGrowedWithGrowAbility(organParams: Interface
 fun main() {
 
 }
-
-
-// Не питайте, наприклад, чому на нозі може вирости око. Це така мутація. А роблю я це для того щоб навчитись вирішувати для мене одного складні задачі і
-// навчитись правильно використовувати інтерфейси, абстрактні та відкриті класи.
-// Знаю що для інших це єрунда. Один я дибіл вже тиждень мучаюсь.
-// Треба щоб будь який орган із можливістю вирощувати органи, а саме: Тулуб, Нога Рука, Рот, Голова, тобто які реалізують інтерфейс
-// InterfaceOfBaseOrganWithGrowAbility могли приймати лише ті органи які можна виростити, а саме Око, Ніс, Вухо, Нога Рука, Рот, Голова,
-// тобто які реалізують інтерфейс InterfaceOfBaseOrganThatCanBeGrowed (чи наслідковуються від BaseOrganThatCanBeGrowed)
-// Короче треба щоб будь який клас який може відрощувати органи, тобто реалізує інтерфейс InterfaceOfBaseOrganWithGrowAbility міг приймати одне з:
-// 1. будь який клас який може вирости BaseOrganThatCanBeGrowed
-// 2. який клас який реалізує інтерфейс InterfaceOfBaseOrganThatCanBeGrowed
-// Що грамотніше вибрати 1 чи 2 ?
-// Пробував використати генеріки але нічого не вийшло в мене.
-// Треба щоб не програма на мене матюкалась, а сам компілятор.
-// Як мені позбавитись повторення override val organs: MutableList<BaseOrganThatCanBeGrowed> = mutableListOf() та override fun growOrgan() {...} у
-// BaseOrganThatCanBeGrowedWithGrowAbility та BaseOrganThatCanNotBeGrowedWithGrowAbility ?
-// Для цього мені треба зробити клас BaseOrganWithGrowAbility і від нього наслідуватись, але тоді я не зможу наслідуватись від класу BaseOrganThatCanBeGrowed
-// і мені прийдеться в двох класах 2 рази повторювати override val owner: InterfaceOfBaseOrganWithGrowAbility бо неможна наслідуватись від двох класів одночасно
-
-// Чому я такий тупорилий?
-// Дупой чую що в мене тут усе через дупу
-// На скіки я тупорилий раз не можу вирішити цю елементарну задачу?
-// Може мені взагалі закинути це програмування і йти на будівництво цеглу тягати?
