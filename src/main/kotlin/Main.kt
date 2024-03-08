@@ -66,44 +66,39 @@ val listOfBodiesParameters = mapOf(
 // ======================================
 // ----- Параметри та списки органів -----
 // =======================================
-
-abstract class TopLevelBaseOrgan(organParams: InterfaceOfBaseOrganParams) : InterfaceOfBaseOrgan {
+abstract class BaseOrgan(organParams: InterfaceOfBaseOrganParams) : InterfaceOfBaseOrgan {
     override val organName: String = organParams.organName
     override val basePower: Int = organParams.basePower
 }
 
-abstract class BaseOrganThatCanNotBeGrowed(organParams: InterfaceOfBaseOrganParams):
-    TopLevelBaseOrgan(organParams)
 
-abstract class BaseOrganThatCanBeGrowed(organParams: InterfaceOfBaseOrganParams):
-    TopLevelBaseOrgan(organParams), InterfaceOfBaseOrganThatCanBeGrowed {
-    override val owner: InterfaceOfBaseOrganWithGrowAbility = TODO()
+abstract class BaseOrganWithOutGrowAbility(organParams: InterfaceOfBaseOrganParamsWithOutGrowAbility) :BaseOrgan(organParams), InterfaceOfBaseOrganWithOutGrowAbility {
 }
+
+abstract class BaseOrganWithGrowAbility(organParams: InterfaceOfBaseOrganParamsWithGrowAbility) : BaseOrgan(organParams), InterfaceOfBaseOrganWithGrowAbility {
+    override val organs: MutableList<InterfaceOfBaseOrganThatCanBeGrowed> = mutableListOf()
+    override val maxOrgansCount = organParams.maxOrgansCount
+}
+
 // Око, Ніс, Вухо
-abstract class BaseOrganThatCanBeGrowedWithOutGrowAbility(organParams: ParamsOfBaseOrganThatCanBeGrowedWithOutGrowAbility) :
-    BaseOrganThatCanBeGrowed(organParams), InterfaceOfBaseOrganWithOutGrowAbility{
+abstract class BaseOrganThatCanBeGrowedWithOutGrowAbility(organParams: InterfaceOfBaseOrganParamsWithOutGrowAbility) :
+    InterfaceOfBaseOrganThatCanBeGrowed, BaseOrganWithOutGrowAbility(organParams){
 }
 
 // Нога Рука, Рот, Голова
-abstract class BaseOrganThatCanBeGrowedWithGrowAbility(organParams: ParamsOfBaseOrganThatCanBeGrowedWithGrowAbility) :
-    BaseOrganThatCanBeGrowed(organParams), InterfaceOfBaseOrganWithGrowAbility {
-    override val maxOrgansCount = organParams.maxOrgansCount
-    override val organs: MutableList<BaseOrganThatCanBeGrowed> = mutableListOf()
-    override fun growOrgan() {
-        TODO("Додає вирощений орган в organs" +
-                "Додає себе у owner вирощеного органу")
-    }
+abstract class BaseOrganThatCanBeGrowedWithGrowAbility(organParams: InterfaceOfBaseOrganParamsWithGrowAbility) :
+    InterfaceOfBaseOrganThatCanBeGrowed, BaseOrganWithGrowAbility(organParams){
 }
 
 // Тулуб
-abstract class BaseOrganThatCanNotBeGrowedWithGrowAbility(organParams: ParamsOfBaseOrganThatCanNotBeGrowedWithGrowAbility) :
-    BaseOrganThatCanNotBeGrowed(organParams), InterfaceOfBaseOrganWithGrowAbility {
-    override val maxOrgansCount = organParams.maxOrgansCount
-    override val organs: MutableList<BaseOrganThatCanBeGrowed> = mutableListOf()
-    override fun growOrgan() {
-        TODO("Додає вирощений орган в organs" +
-                "Додає себе у owner вирощеного органу")    }
+abstract class BaseOrganThatCanNotBeGrowedWithGrowAbility(organParams: InterfaceOfBaseOrganParamsWithGrowAbility) :
+    InterfaceOfBaseOrganThatCanNotBeGrowed, BaseOrganWithGrowAbility(organParams){
 }
+
+fun main() {
+
+}
+
 
 // Не питайте, наприклад, чому на нозі може вирости око. Це така мутація. А роблю я це для того щоб навчитись вирішувати для мене одного складні задачі і
 // навчитись правильно використовувати інтерфейси, абстрактні та відкриті класи.
@@ -126,7 +121,3 @@ abstract class BaseOrganThatCanNotBeGrowedWithGrowAbility(organParams: ParamsOfB
 // Дупой чую що в мене тут усе через дупу
 // На скіки я тупорилий раз не можу вирішити цю елементарну задачу?
 // Може мені взагалі закинути це програмування і йти на будівництво цеглу тягати?
-
-fun main() {
-
-}

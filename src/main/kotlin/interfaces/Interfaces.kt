@@ -31,13 +31,15 @@ interface InterfaceOfBaseOrganThatCanBeGrowed : InterfaceOfBaseOrgan {
     val owner: InterfaceOfBaseOrganWithGrowAbility
 }
 
+interface InterfaceOfBaseOrganThatCanNotBeGrowed : InterfaceOfBaseOrgan {
+}
+
 interface InterfaceOfBaseOrganWithOutGrowAbility : InterfaceOfBaseOrgan {
 }
 
 interface InterfaceOfBaseOrganWithGrowAbility : InterfaceOfBaseOrgan {
     val maxOrgansCount: Int
-    val organs: MutableList<BaseOrganThatCanBeGrowed>
-    fun growOrgan()
+    val organs: MutableList<InterfaceOfBaseOrganThatCanBeGrowed>
 }
 
 
